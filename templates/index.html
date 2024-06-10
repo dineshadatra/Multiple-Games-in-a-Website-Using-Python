@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pygame Launcher</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #f8cdda, #1fd1f9);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            background-color: linear-gradient(to right,  #1fd1f9,#f8cdda);
+            color: white;
+            padding: 20px;
+            margin: 0;
+            width: 100%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+        .game-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            padding: 10px;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+            width: 220px;
+        }
+        .game-container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .game-icon {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .game-title {
+            margin-top: 10px;
+            font-size: 18px;
+            color: #333;
+        }
+        @media (max-width: 600px) {
+            .game-icon {
+                width: 150px;
+                height: 150px;
+            }
+            .game-title {
+                font-size: 16px;
+            }
+        }
+    </style>
+    <script>
+        function runGame(gameName) {
+            fetch(`/run_game/${gameName}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    alert(data.message);
+                } else {
+                    alert('Error: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>Select a Game to Play</h1>
+    <div class="container">
+        <div class="game-container" onclick="runGame('brick_breaker')">
+            <img src="static/brick_breaker.jpeg" alt="Game 1" class="game-icon">
+            <div class="game-title">Brick Breaker</div>
+        </div>
+        <div class="game-container" onclick="runGame('2048')">
+            <img src="static/2048.png" alt="Game 2" class="game-icon">
+            <div class="game-title">2048</div>
+        </div>
+        <div class="game-container" onclick="runGame('tictactoe')">
+            <img src="static/tictactoe.jpg" alt="Game 3" class="game-icon">
+            <div class="game-title">Tic-Tac-Toe</div>
+        </div>
+        <div class="game-container" onclick="runGame('word_guess')">
+            <img src="static/guess_the_word.jpg" alt="Game 4" class="game-icon">
+            <div class="game-title">Guess the word</div>
+        </div>
+        <div class="game-container" onclick="runGame('pong')">
+            <img src="static/pong.jpg" alt="Game 5" class="game-icon">
+            <div class="game-title">Pong</div>
+        </div>
+        <div class="game-container" onclick="runGame('car')">
+            <img src="static/car.jpeg" alt="Game 6" class="game-icon">
+            <div class="game-title">Car</div>
+        </div>
+        <div class="game-container" onclick="runGame('minesweeper')">
+            <img src="static/mines.jpeg" alt="Game 7" class="game-icon">
+            <div class="game-title">Mines</div>
+        </div>
+        <div class="game-container" onclick="runGame('snake')">
+            <img src="static/snake.jpg" alt="Game 8" class="game-icon">
+            <div class="game-title">Snake</div>
+        </div>
+        <div class="game-container" onclick="runGame('DinoGame')">
+            <img src="static/dino.jpeg" alt="Game 9" class="game-icon">
+            <div class="game-title">Dino</div>
+        </div>
+        <div class="game-container" onclick="runGame('ConnectGAme')">
+            <img src="static/connect.jpeg" alt="Game 10" class="game-icon">
+            <div class="game-title">Connect</div>
+        </div>
+    </div>
+</body>
+</html>
